@@ -4,6 +4,7 @@ from playhouse.db_url import connect
 from playhouse.shortcuts import *
 import datetime
 from settings import *
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SqliteDatabase(SQLITE_URL)
 
@@ -11,21 +12,38 @@ class BaseModel(Model):
     class Meta:
         dabtabase = db
 
-class UserGroup(BaseModel):
-    name = CharField(default='', unique=True)
-    class Meta:
-        db_table = 'user_group'
-
 class User(BaseModel):
-    user_group = ForeignKeyField(UserGroup, on_update='CASCADE', on_delete='CASCADE')
-    name = CharField(unique=False)
+    username = CharField(unique=True)
     email = CharField(index=True, unique=True)
+    password_hash = CharField(max_length=128)
     indro = TextField(default='')
     admin = BooleanField(default=True)
     phone_number = CharField(default='')
     created_at = DateTimeField(default=datetime.datetime.now)
+
     class Meta:
         db_table = 'user'
+
+    @property
+    def password(self):
+        raise AttributeError('password is not a readable attribute.')
+
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def to_json(self):
+        return {
+            'id': self.id,
+            'name': self.user.name,
+            'mail': self.email,
+            'intro': self.intro,
+            'phone_number': self.phone_number,
+            'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        }
 
 class Settings(BaseModel):
     editor_theme = CharField()
@@ -113,7 +131,7 @@ class History(BaseModel):
         }
 
 def create_tables():
-    db.create_tables([User, Settings, Post, Tag, UserGroup, Notify, History, PostTags], safe=True)
+    db.create_tables([User, Settings, Post, Tag, Notify, History, PostTags], safe=True)
 
 if __name__ == '__main__':
     create_tables()

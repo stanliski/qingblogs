@@ -12,14 +12,32 @@ class LoginHandler(tornado.web.RequestHandler):
         self.render('admin/account/login.html')
 
     def post(self):
-        print 'post'
+        username = self.get_argument('username', None)
+        password = self.get_argument('passwd', None)
+        if (not username) or (not password):
+            self.write({'success': False, 'message': "username or passwd is not allowed to be empty"})
+        else:
+            try:
+                user = models.User.select().where(models.User.username == username).get()
+                if user is not None and user.verify_password(password):
+                    self.write({'success': True, 'message': user.to_json()})
+                else:
+                    self.write({'success': False, 'message': 'user password is not right'})
+            except Exception, e:
+                self.write({'success': False, 'message': str(e)})
 
 class RegisterHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('admin/account/register.html')
 
     def post(self):
-        print 'post'
+        username = self.get_argument('username', None)
+        passwd = self.get_argument('passwd', None)
+        mail = self.get_argument('mail', None)
+        if (not username) and (not passwd) and (not mail):
+            self.redirect('/admin')
+        else:
+            self.write({'success': False})
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
