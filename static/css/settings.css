@@ -1,0 +1,12 @@
+#settings {
+  text-align: left;
+  padding: 20px 40px;
+}
+
+#settings h2,h3 {
+  color: gray;
+}
+
+#settings div {
+  padding: 10px;
+}

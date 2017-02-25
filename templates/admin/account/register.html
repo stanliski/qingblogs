@@ -1,0 +1,29 @@
+{% extends "layout.html" %} {% block content %}
+<h2>注册</h2>
+<div class="account" id="app">
+  <div class="ui large left icon input" style="width: 100%;">
+    <input type="text" placeholder="用户名" v-model="username">
+    <i class="user icon"></i>
+  </div>
+  <div class="ui large left icon input" style="width: 100%; margin-top:12px;">
+    <input type="text" placeholder="邮箱" v-model="mail">
+    <i class="mail icon"></i>
+  </div>
+  <div class="ui large left icon input" style="width: 100%; margin-top:12px;">
+    <input type="password" placeholder="密码" v-model="passwd">
+    <i class="unlock alternate icon"></i>
+  </div>
+  <div class="ui large left icon input" style="width: 100%; margin-top:12px;">
+    <input type="password" placeholder="重复密码" v-model="repasswd">
+    <i class="unlock alternate icon"></i>
+  </div>
+  <button class="ui large black button" style="width: 100%; margin-top: 20px; background-color: rgb(87, 179, 130)" @click="onRegister">
+    注 册
+  </button>
+  <div class="tip">
+    <a href="/admin/login"><span><i class="fa fa-chevron-left"></i> 返回登录</span></a>
+  </div>
+</div>
+{% end %} {% block js %}
+<script type="text/javascript" src="{{static_url('js/register.js')}}"></script>
+{% end %} {% block style %} {% end %}

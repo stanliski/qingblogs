@@ -1,0 +1,26 @@
+{% extends "layout.html" %} {% block content %}
+<div id="app">
+  <div class="ui form">
+    <div class="inline fields">
+      <div class="eight wide field">
+        <label>标题</label>
+        <input type="text" placeholder="文章标题" v-model="title">
+      </div>
+      <div class="field">
+        <button class="ui button"><i class="fa fa-envelope"></i> 保存草稿</button>
+      </div>
+      <div class="field">
+        <button class="ui button" style="background-color: #57b382; color: #fff;" @click="postBlog"><i class="fa fa-bookmark"></i> 发布文章</button>
+      </div>
+    </div>
+  </div>
+  <div id="editormd" class="editormd-theme-dark">
+    <textarea style="display:none;"></textarea>
+  </div>
+</div>
+{% end %} {% block js %}
+<script type="text/javascript" src="{{static_url('components/editor.md/editormd.min.js')}}"></script>
+<script type="text/javascript" src="{{static_url('js/post.js')}}"></script>
+{% end %} {% block style %}
+<link rel="stylesheet" type="text/css" href="{{static_url('components/editor.md/css/editormd.min.css')}}" />
+<link rel="stylesheet" type="text/css" href="{{static_url('css/post.css')}}"> {% end %}

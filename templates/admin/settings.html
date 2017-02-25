@@ -1,0 +1,57 @@
+{% extends "layout.html" %} {% block content %}
+<div id="settings">
+  <h2>设置</h2>
+  <h3>编辑器</h3>
+  <div>
+    <h5>主题风格</h5>
+    <select class="ui search dropdown">
+      <option value="">ambiance-mobile</option>
+      <option value="AL">Alabama</option>
+      <option value="AK">Alaska</option>
+      <option value="AZ">Arizona</option>
+      <option value="AR">Arkansas</option>
+    </select>
+    <h5>同步到有道云笔记</h5>
+    <div class="ui slider checkbox">
+      <input type="checkbox" name="newsletter" >
+      <label>文章列表自动同步到有道云笔记</label>
+    </div>
+    <h5>同步到印象笔记</h5>
+    <div class="ui slider checkbox">
+      <input type="checkbox" name="newsletter" >
+      <label>文章列表自动同步到有道云笔记</label>
+    </div>
+  </div>
+  <h3>博客站点</h3>
+  <div>
+    <h5>背景图片</h5>
+    <div class="ui form" style="margin-left:-30px;">
+      <div class="inline fields">
+        <div class="eight wide field">
+          <input type="file" placeholder="文章标题">
+        </div>
+        <div class="field">
+          <button class="ui button"><i class="fa fa-cloud-upload"></i> 上传图片</button>
+        </div>
+      </div>
+    </div>
+    <h5>主题风格</h5>
+    <select class="ui search dropdown">
+      <option value="">ambiance-mobile</option>
+      <option value="AL">Alabama</option>
+      <option value="AK">Alaska</option>
+      <option value="AZ">Arizona</option>
+      <option value="AR">Arkansas</option>
+    </select>
+    <h5>Markdown风格</h5>
+    <select class="ui search dropdown">
+      <option value="">ambiance-mobile</option>
+      <option value="AL">Alabama</option>
+      <option value="AK">Alaska</option>
+      <option value="AZ">Arizona</option>
+      <option value="AR">Arkansas</option>
+    </select>
+  </div>
+</div>
+{% end %} {% block style %}
+<link rel="stylesheet" type="text/css" href="{{static_url('css/settings.css')}}"> {% end %}
