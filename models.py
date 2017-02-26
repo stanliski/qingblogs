@@ -6,15 +6,17 @@ import datetime
 from settings import *
 from werkzeug.security import generate_password_hash, check_password_hash
 
-db = SqliteDatabase(SQLITE_URL)
+DATABASE = SqliteDatabase(SQLITE_URL)
+
 
 class BaseModel(Model):
+
     class Meta:
-        dabtabase = db
+        dabtabase = DATABASE
 
 class User(BaseModel):
     username = CharField(unique=True)
-    email = CharField(index=True, unique=True)
+    mail = CharField(unique=True, default='')
     password_hash = CharField(max_length=128)
     indro = TextField(default='')
     admin = BooleanField(default=True)
@@ -39,11 +41,12 @@ class User(BaseModel):
         return {
             'id': self.id,
             'name': self.user.name,
-            'mail': self.email,
+            'mail': self.mail,
             'intro': self.intro,
             'phone_number': self.phone_number,
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         }
+
 
 class Settings(BaseModel):
     editor_theme = CharField()
@@ -52,8 +55,10 @@ class Settings(BaseModel):
     bg_img = CharField(default="")
     blog_theme = CharField(default='')
     markdown_theme = CharField(default='')
+
     class Meta:
         db_table = 'settings'
+
 
 class Tag(BaseModel):
     user = ForeignKeyField(User, on_update='CASCADE', on_delete='CASCADE')
@@ -73,6 +78,7 @@ class Tag(BaseModel):
             'updated_at': self.updated_at.strftime('%Y-%m-%d %H:%M:%S')
         }
 
+
 class Notify(BaseModel):
     user = ForeignKeyField(User, on_update='CASCADE', on_delete='CASCADE')
     content = TextField(default='')
@@ -89,11 +95,12 @@ class Notify(BaseModel):
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         }
 
+
 class Post(BaseModel):
     user = ForeignKeyField(User, on_update='CASCADE', on_delete='CASCADE')
-    title = CharField(unique=True)
+    title = CharField(default='')
     content = TextField(default='')
-    status = IntegerField(default=0) # 0 publish, 1 hide, 2 trash
+    status = IntegerField(default=0)  # 0 publish, 1 hide, 2 trash
     created_at = DateTimeField(default=datetime.datetime.now)
     updated_at = DateTimeField(default=datetime.datetime.now)
 
@@ -110,11 +117,14 @@ class Post(BaseModel):
             'updated_at': self.updated_at.strftime('%Y-%m-%d %H:%M:%S')
         }
 
+
 class PostTags(BaseModel):
     post = ForeignKeyField(Post)
     tag = ForeignKeyField(Tag)
+
     class Meta:
         db_table = 'post_tags'
+
 
 class History(BaseModel):
     content = CharField(default='')
@@ -130,8 +140,13 @@ class History(BaseModel):
             'created_at': self.created_at.strftime('%Y-%m-%d %H:%M:%S')
         }
 
+
 def create_tables():
-    db.create_tables([User, Settings, Post, Tag, Notify, History, PostTags], safe=True)
+    DATABASE.create_tables(
+        [User, Settings, Post, Tag, Notify, History, PostTags], safe=True)
 
 if __name__ == '__main__':
     create_tables()
+    user = User.create(username='stanley',
+                       mail='1015757334@qq.com', password='123')
+    user.save()

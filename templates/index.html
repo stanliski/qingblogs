@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+<!-- style -->
+{% block style %}
+<link ref="stylesheet"  type="text/css" href="{{static_url('admin/css/index.css')}}">
+{% end %}
+<!-- content -->
+{% block content %}
+<div id="app">
+  <div class="toolbar">
+    <button class="ui mini secondary button" style="background-color: #57b382;" @click="createBlog">
+          <i class="fa fa-edit"></i>
+          写文章
+        </button>
+    <button class="ui mini secondary button">
+          <i class="fa fa-th-large"></i>
+          更多操作
+        </button>
+    <div class="ui mini icon input" style="width: 300px;">
+      <input type="text" placeholder="标题搜索...">
+      <i class="circular search link icon"></i>
+    </div>
+    <button class="ui mini secondary button" style="background-color: #57b382;">
+    <i class="fa fa-calendar" aria-hidden="true"></i>
+  </button>
+  </div>
+  <table class="ui celled definition table">
+    <thead>
+      <tr>
+        <th>
+          选中
+        </th>
+        <th>ID</th>
+        <th>文章标题</th>
+        <th>状态</th>
+        <th class="single line">类别</th>
+        <th class="single line">发布时间</th>
+        <th class="single line">发布人</th>
+        <th class="single line">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="v in posts">
+        <td>
+          <input type="checkbox">
+        </td>
+        <td>1</td>
+        <td>
+        {{ v.title }}
+        </td>
+        <td>
+          发布
+        </td>
+        <td>
+          前端开发
+        </td>
+        <td>
+        </td>
+        <td>
+          马克
+        </td>
+        <td>
+          <button class="ui mini secondary button" style="background-color: #57b382">
+                  <i class="fa fa-edit"></i>
+                </button>
+          <button class="ui mini button">
+                  <i class="fa fa-trash"></i>
+                </button></td>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% end %}
+{% block js %}
+<script type="text/javascript" src="{{static_url('js/index.js')}}"></script>
+{% end %}

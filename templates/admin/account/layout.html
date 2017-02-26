@@ -10,22 +10,22 @@
   <link rel="stylesheet" href="{{static_url('components/semantic/dist/semantic.min.css')}}">
   <!-- <link rel="stylesheet" href="{{static_url('components/bootstrap/dist/css/bootstrap.min.css')}}"> -->
   <link rel="stylesheet" type="text/css" href="{{static_url('components/font-awesome/css/font-awesome.min.css')}}">
-  <link rel="stylesheet" type="text/css" href="{{static_url('admin/css/account.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{static_url('css/account.css')}}">
 </head>
 
 <body>
   <div class="main">
     <div class="container">
-      <div class="wrap">
+      <div class="wrap" id="app">
         {% block content %} {% end %}
       </div>
+      <!-- javascript -->
+      <script type="text/javascript" src="{{static_url('components/vue/dist/vue.min.js')}}"></script>
+      <script type="text/javascript" src="{{static_url('components/jquery/dist/jquery.min.js')}}"></script>
+      <script type="text/javascript" src="{{static_url('components/semantic/dist/semantic.min.js')}}"></script>
+      {% block js %} {% end %}
     </div>
   </div>
-  <!-- javascript -->
-  <script type="text/javascript" src="{{static_url('components/vue/dist/vue.min.js')}}"></script>
-  <script type="text/javascript" src="{{static_url('components/jquery/dist/jquery.min.js')}}"></script>
-  <script type="text/javascript" src="{{static_url('components/semantic/dist/semantic.min.js')}}"></script>
-  {% block js %} {% end %}
   <!-- style -->
   {% block style %} {% end %}
 </body>

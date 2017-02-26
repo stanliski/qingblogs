@@ -1,39 +1,39 @@
 new Vue({
-    el: "#app",
-    data: {
-        username: "",
-        passwd: "",
-    },
-    methods: {
-        onLogin: function() {
-            var remoteApi = "/admin/login";
-            var self = this;
-            console.log(this.username);
-            console.log(this.passwd);
-            $.ajax({
-                url: remoteApi,
-                type: 'post',
-                data: {
-                    'username': self.username,
-                    'passwd': self.passwd
-                },
-                success: function(res) {
-                    console.log(res.success + ":" + res.message);
-                },
-                error: function() {
-
-                }
-            });
+  el: "#app",
+  data: {
+    username: "",
+    password: "",
+  },
+  methods: {
+    onLogin: function() {
+      var remoteApi = "/admin/login";
+      var self = this;
+      $.ajax({
+        url: remoteApi,
+        type: 'post',
+        data: {
+          'username': self.username,
+          'password': self.password,
         },
-
-        onForget: function() {
-            location.href = "/admin/find"
+        success: function(res) {
+          if (res.success) {
+            location.href = '/admin'
+          } else {
+            console.log(res.success + ":" + res.message);
+          }
         },
+        error: function() {}
+      });
     },
-    init: function() {
 
+    onForget: function() {
+      location.href = "/admin/find"
     },
-    created: function() {
+  },
+  init: function() {
 
-    },
+  },
+  created: function() {
+
+  },
 })
