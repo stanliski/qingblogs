@@ -22,6 +22,20 @@ def make_app(**settings):
     settings['template_path'] = 'templates'
     settings['static_path'] = 'static'
     settings['cookie_secret'] = 'TODO:_'
+    settings['pycket'] = {
+        'engine': 'redis',
+        'storage': {
+            'host': 'localhost',
+            'port': 6379,
+            'db_sessions': 10,
+            'db_notifications': 11,
+            'max_connections': 2**31,
+        },
+        'cookies': {
+            # 5 设置过期时间
+            'expires_days': 2,
+        },
+    }
     return tornado.web.Application([
         (r'/admin', handlers.admin.MainHandler),
         (r'/admin/post', handlers.admin.PostHandler),
@@ -29,8 +43,11 @@ def make_app(**settings):
         (r'/admin/settings', handlers.admin.SettingsHandler),
         (r'/admin/trash', handlers.admin.TrashHandler),
         (r'/admin/login', handlers.admin.LoginHandler),
+        (r'/admin/logout', handlers.admin.LogoutHandler),
         (r'/admin/register', handlers.admin.RegisterHandler),
         (r'/admin/find', handlers.admin.FindPasswdHandler),
+        (r'/admin/posts', handlers.admin.PostListHandler),
+        (r'/admin/edit', handlers.admin.EditPostHandler),
         # api
         (r'/api/v1/post', handlers.api.ApiPostHandler),
     ], **settings)

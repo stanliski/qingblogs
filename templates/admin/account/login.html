@@ -10,6 +10,11 @@
     <i class="unlock alternate icon"></i>
     <button class="ui button" @click="onForget">忘记密码?</button>
   </div>
+  <div class="ui large left icon right action input" style="width: 100%; margin-top:12px;">
+    <input type="text" placeholder="验证码" v-model="verifyCode">
+    <i class="calculator icon"></i>
+    <button class="ui button">1234</button>
+  </div>
   <button class="ui large black button" style="width: 100%; margin-top: 20px; background-color: rgb(87, 179, 130)" @click="onLogin" >
     登 录
   </button>

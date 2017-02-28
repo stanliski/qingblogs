@@ -1,2 +1,4 @@
 tornado==4.3
 pycket
+image
+redis

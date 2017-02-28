@@ -1,16 +1,20 @@
-# Qing Blogs
+## Qing Blogs
 A light markdown editor
 
-# Features
+## Features
 - [x] Write markdown blogs
 - [x] Free markdown editor
 - [x] Easy to install and use
 
-# Usage
+## Install
+- Redis
+- Python 2.7
+
+## Usage
 ```
 $ python main.py
 ```
 
 
-# LICENSE
+## LICENSE
 Under [MIT](LICENSE)

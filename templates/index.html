@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
 <!-- style -->
 {% block style %}
-<link ref="stylesheet"  type="text/css" href="{{static_url('admin/css/index.css')}}">
-{% end %}
+<link ref="stylesheet" type="text/css" href="{{static_url('admin/css/index.css')}}"> {% end %}
 <!-- content -->
 {% block content %}
 <div id="app">
@@ -45,7 +44,7 @@
         </td>
         <td>1</td>
         <td>
-        {{ v.title }}
+          {{! v.title }}
         </td>
         <td>
           发布
@@ -54,15 +53,16 @@
           前端开发
         </td>
         <td>
+          {{! v.created_at }}
         </td>
         <td>
-          马克
+          {{! v.user.name }}
         </td>
         <td>
-          <button class="ui mini secondary button" style="background-color: #57b382">
+          <button class="ui mini secondary button" style="background-color: #57b382" @click="editBlog(v.id)">
                   <i class="fa fa-edit"></i>
                 </button>
-          <button class="ui mini button">
+          <button class="ui mini button" @click="onDelete(v.id, v.title)">
                   <i class="fa fa-trash"></i>
                 </button></td>
         </td>
@@ -70,7 +70,20 @@
     </tbody>
   </table>
 </div>
-{% end %}
-{% block js %}
+
+<div class="ui small modal">
+  <i class="close icon"></i>
+  <div class="header"> 删除 </div>
+  <div class="content" style='text-align:center'>
+    <div class="description"> 确认删除文章 <b>{{! post.title }}</b> </div>
+  </div>
+  <div class="actions">
+    <div class="ui red button" @click='handleDel()'>
+      删除
+    </div>
+  </div>
+</div>
+
+{% end %} {% block js %}
 <script type="text/javascript" src="{{static_url('js/index.js')}}"></script>
 {% end %}

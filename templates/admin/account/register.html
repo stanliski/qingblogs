@@ -1,8 +1,8 @@
 {% extends "layout.html" %} {% block content %}
-<h2>注册</h2>
+<h2>QING注册</h2>
 <div class="account" id="app">
   <div class="ui large left icon input" style="width: 100%;">
-    <input type="text" placeholder="用户名" v-model="username">
+    <input type="text" placeholder="用户名" v-model="username" data-content="The default theme's basic popup removes the pointing arrow." data-variation="basic">
     <i class="user icon"></i>
   </div>
   <div class="ui large left icon input" style="width: 100%; margin-top:12px;">
@@ -16,6 +16,11 @@
   <div class="ui large left icon input" style="width: 100%; margin-top:12px;">
     <input type="password" placeholder="重复密码" v-model="repasswd">
     <i class="unlock alternate icon"></i>
+  </div>
+  <div class="ui large left icon right action input" style="width: 100%; margin-top:12px;">
+    <input type="text" placeholder="验证码" v-model="verifyCode">
+    <i class="calculator icon"></i>
+    <button class="ui button">1234</button>
   </div>
   <button class="ui large black button" style="width: 100%; margin-top: 20px; background-color: rgb(87, 179, 130)" @click="onRegister">
     注 册

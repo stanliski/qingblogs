@@ -4,23 +4,24 @@
     <div class="inline fields">
       <div class="eight wide field">
         <label>标题</label>
-        <input type="text" placeholder="文章标题" v-model="title">
+        <input type="text" placeholder="文章标题" v-model="title" value="{{ title }}">
+        <input type="hidden" v-model="id" value="{{ id }}">
       </div>
       <div class="field">
         <button class="ui button"><i class="fa fa-th-large"></i></button>
       </div>
       <div class="field">
-        <button class="ui button" style="background-color: #57b382; color: #fff;" @click="postBlog"><i class="fa fa-bookmark"></i> 发布文章</button>
+        <button class="ui button" style="background-color: #57b382; color: #fff;" @click="updateBlog"><i class="fa fa-bookmark"></i> 发布文章</button>
       </div>
     </div>
   </div>
   <div id="editormd" class="editormd-theme-dark">
-    <textarea style="display:none;"></textarea>
+    <textarea style="display:none;">{{ content }}</textarea>
   </div>
 </div>
 {% end %} {% block js %}
 <script type="text/javascript" src="{{static_url('components/editor.md/editormd.min.js')}}"></script>
-<script type="text/javascript" src="{{static_url('js/post.js')}}"></script>
+<script type="text/javascript" src="{{static_url('js/edit.js')}}"></script>
 {% end %} {% block style %}
 <link rel="stylesheet" type="text/css" href="{{static_url('components/editor.md/css/editormd.min.css')}}" />
 <link rel="stylesheet" type="text/css" href="{{static_url('css/post.css')}}"> {% end %}
